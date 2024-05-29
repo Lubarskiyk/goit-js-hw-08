@@ -21,7 +21,7 @@ img {
   display: block;
 }
 a {
-  cursor: url(/cursor.svg), auto;
+  cursor: url(../img/cursor.svg), auto;
 }
 
 .gallery {
