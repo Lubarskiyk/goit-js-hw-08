@@ -1,5 +1,3 @@
-// import * as imgModalbox from 'basiclightbox';
-
 const images = [
   {
     preview:
@@ -65,36 +63,39 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-const galleryList = document.querySelector('.gallery');
 
-const markupImages = images
-  .map(
-    image =>
-      `<li class="gallery-item">
- 			<a class="gallery-link">
-				<img
-					class="gallery-image"
-					src="${image.preview}" 
-					data-source="${image.original}"
-					alt=""${image.description}"
-				/>
- 			 </a>
-		</li>`
-  )
-  .join('');
-
-galleryList.insertAdjacentHTML('beforeend', markupImages);
-galleryList.addEventListener('click', selectImage);
+function markupImages(images) {
+  return images
+    .map(
+      ({ preview, original, description }) =>
+        `<li class="gallery-item">
+ 				<a class="gallery-link">
+ 					<img
+ 						class="gallery-image"
+ 						src="${preview}"
+ 						data-source="${original}"
+ 						alt=""${description}"
+ 					/>
+  			 	</a>
+ 			</li>`
+    )
+    .join('');
+}
 
 function selectImage(event) {
-  console.log(event.target.nodeName);
   if (event.target.nodeName !== 'IMG') {
     return;
   }
-  console.log(event.target.dataset.source);
+
+  const linkImg = event.target.dataset.source;
+
   // eslint-disable-next-line no-undef
-  const instance = basicLightbox.create(
-    `<img src="${event.target.dataset.source}" width="1112" height="640">`
+  const modalCreate = basicLightbox.create(
+    `<img src="${linkImg}" width="1112" height="640">`
   );
-  instance.show();
+  modalCreate.show();
 }
+
+const galleryList = document.querySelector('.gallery');
+galleryList.insertAdjacentHTML('beforeend', markupImages(images));
+galleryList.addEventListener('click', selectImage);
