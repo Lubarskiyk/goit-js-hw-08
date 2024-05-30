@@ -74,7 +74,7 @@ function markupImages(images) {
  						class="gallery-image"
  						src="${preview}"
  						data-source="${original}"
- 						alt=""${description}"
+ 						alt="${description}"
  					/>
   			 	</a>
  			</li>`
